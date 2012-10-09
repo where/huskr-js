@@ -1,23 +1,27 @@
 {
-  "name": "huskr",
-  "version": "0.0.1",
-  "author": "Jean-Charles Sisk <jsisk@paypal.com>",
+  "name":     "huskr",
+  "version":  "0.0.1",
+  "author":   "Jean-Charles Sisk <jsisk@paypal.com>",
+  "private":  true,
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://www.opensource.org/licenses/MIT"
+      "url":  "http://www.opensource.org/licenses/MIT"
     }
   ],
   "engines": {
     "node": ">=0.8.6"
   },
-  "scripts": {"test": "./node_modules/mocha/bin/mocha"},
-  "dependencies":{
-    "mocha": "latest",
-    "chai": "latest",
-    "sinon": "latest",
+  "scripts": {
+    "test":   "./node_modules/mocha/bin/mocha",
+    "build":  "./node_modules/mocha/bin/grunt"
+  },
+  "devDependencies":{
+    "mocha":      "latest",
+    "chai":       "latest",
+    "sinon":      "latest",
     "sinon-chai": "latest",
-    "grunt": "latest"
+    "grunt":      "latest"
   }
 }
 
