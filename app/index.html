@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Huskr - Where a kid can be a kid!</title>
+  
+  <!-- Included CSS Files (Uncompressed) -->
+  <!--
+  <link rel="stylesheet" href="stylesheets/foundation.css">
+  -->
+  
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+  <nav class="top-bar">
+    <ul>
+      <li class="name"><h1><a href="#">Huskr - Where a kid can be a kid!</a></h1></li>
+      <li class="toggle-topbar"><a href="#"></a></li>
+    </ul>
+    <section>
+      <ul class="right">
+        <li><a href="#">Not logged in</a></li>
+      </ul>
+    </section>
+  </nav>
+
+  <div class="row">
+    <div class="twelve columns">
+      <h2>Welcome to Huskr</h2>
+      <hr />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="eight columns">
+      <h3>Statuses</h3>
+
+      <!-- Grid Example -->
+      <div id="statuses">
+        <p>Loading ...</p>
+      </div>
+    </div>
+
+    <div class="four columns">
+      <div class="panel radius" style="text-align: center;">
+        <a href="#" class="middle large round hairy button" data-reveal-id="postModal">Post a new status</a>
+      </div>
+      <h4>Welcome to Huskr</h4>
+      <p>Check out all the cool things that people do. Buy a cat? Huskr it. Eat a pizza? Huskr it. Wear a dress? Huskr it! Everybody cares.</p>
+
+      <h4>Other Resources</h4>
+      <ul class="disc">
+        <li><a href="http://www.twitter.com">twitter</a></li>
+      </ul>
+    </div>
+  </div>
+    
+  <div id="postModal" class="reveal-modal">
+    <h2>Post a new status.</h2>
+    <form id="newStatus">
+      <input type="text" placeholder="Name" name="user_name">
+      <textarea placeholder="Status message (140 characters)" rows="10" name="title"></textarea>
+      <input type="submit" class="success button">
+    </form>
+    <a class="close-reveal-modal">×</a>
+  </div>
+  
+  <script type="text/template" id="status-view">
+    <div class="twelve columns">
+        <blockquote>
+          <%= title %>
+          <cite><%= user_name %> @ <%= created_at %></cite>
+        </blockquote>
+    </div>
+  </script>
+  
+  <!-- Included JS Files (Uncompressed) -->
+  <!--
+  
+  <script src="javascripts/jquery.js"></script>
+  
+  <script src="javascripts/jquery.foundation.mediaQueryToggle.js"></script>
+  
+  <script src="javascripts/jquery.foundation.forms.js"></script>
+  
+  <script src="javascripts/jquery.foundation.reveal.js"></script>
+  
+  <script src="javascripts/jquery.foundation.orbit.js"></script>
+  
+  <script src="javascripts/jquery.foundation.navigation.js"></script>
+  
+  <script src="javascripts/jquery.foundation.buttons.js"></script>
+  
+  <script src="javascripts/jquery.foundation.tabs.js"></script>
+  
+  <script src="javascripts/jquery.foundation.tooltips.js"></script>
+  
+  <script src="javascripts/jquery.foundation.accordion.js"></script>
+  
+  <script src="javascripts/jquery.placeholder.js"></script>
+  
+  <script src="javascripts/jquery.foundation.alerts.js"></script>
+  
+  <script src="javascripts/jquery.foundation.topbar.js"></script>
+  
+  -->
+
+  <!-- Included JS Files (Compressed) -->
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/foundation.min.js"></script>
+  <script src="javascripts/lodash-min.js"></script>
+  <script src="javascripts/backbone-min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="javascripts/app.js"></script>
+</body>
+</html>
