@@ -89,7 +89,12 @@
     <div class="twelve columns">
         <blockquote>
           <%= title %>
-          <cite><%= user_name %> @ <%= created_at %></cite>
+          <cite>
+            <strong><%= user_name %></strong>
+            <span title="<%= created_at %>" class="relative-time">
+              <% print( huskr.utils.formatDate(created_at) ); %>
+            </span>
+          </cite>
         </blockquote>
     </div>
   </script>
@@ -127,6 +132,7 @@
 
   <!-- Included JS Files (Compressed) -->
   <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/sugar-1.3.5-custom.min.js"></script>
   <script src="javascripts/foundation.min.js"></script>
   <script src="javascripts/lodash-min.js"></script>
   <script src="javascripts/backbone-min.js"></script>
