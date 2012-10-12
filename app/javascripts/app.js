@@ -108,7 +108,7 @@
       },
       renderTime: function() {
         $( ".relative-time", this.$el ).text(
-          window.huskr.utils.formatDate( this.model.get("created_at") );
+          window.huskr.utils.formatDate( this.model.get("created_at") )
         );
       },
       updateTime: function() {
