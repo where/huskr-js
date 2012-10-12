@@ -35,24 +35,34 @@
   <nav class="top-bar">
     <ul>
       <li class="name"><h1><a href="#">Huskr - Where a kid can be a kid!</a></h1></li>
-      <li class="toggle-topbar"><a href="#"></a></li>
     </ul>
-    <section>
-      <ul class="right">
-        <li><a href="#">Not logged in</a></li>
-      </ul>
-    </section>
   </nav>
 
   <div class="row">
     <div class="twelve columns">
-      <h2>Welcome to Huskr</h2>
+      <h2 class="hide-for-small"><img src="images/icon.png" alt="Huskr" width="40" height="40" style="vertical-align: top;margin-right: 10px;">Welcome to Huskr</h2>
+      <h2 class="show-for-small" style="text-align: center;"><img src="images/icon2x.png" alt="Huskr" width="80" height="80" style="vertical-align: top;"><br>Huskr</h2>
       <hr />
     </div>
   </div>
 
   <div class="row">
-    <div class="eight columns">
+    <div class="four columns push-eight">
+      <div class="" style="text-align: center;">
+        <a href="#" class="large button" id="postButton">Post a New Status</a>
+      </div>
+      <div class="hide-for-small">
+        <h4>Welcome to Huskr</h4>
+        <p>Check out all the cool things that people do. Buy a cat? Huskr it. Eat a pizza? Huskr it. Wear a dress? Huskr it! Everybody cares.</p>
+
+        <h4>Other Resources</h4>
+        <ul class="disc">
+          <li><a href="http://www.twitter.com">twitter</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="eight columns pull-four">
       <h3>Statuses</h3>
 
       <!-- Grid Example -->
@@ -61,25 +71,14 @@
       </div>
     </div>
 
-    <div class="four columns">
-      <div class="panel radius" style="text-align: center;">
-        <a href="#" class="middle large round hairy button" id="postButton">Post a new status</a>
-      </div>
-      <h4>Welcome to Huskr</h4>
-      <p>Check out all the cool things that people do. Buy a cat? Huskr it. Eat a pizza? Huskr it. Wear a dress? Huskr it! Everybody cares.</p>
-
-      <h4>Other Resources</h4>
-      <ul class="disc">
-        <li><a href="http://www.twitter.com">twitter</a></li>
-      </ul>
-    </div>
   </div>
     
   <div id="postModal" class="reveal-modal">
-    <h2>Post a new status.</h2>
+    <h2 class="hide-for-small">Post a New Status</h2>
+    <h2 class="show-for-small">New Status</h2>
     <form id="newStatus">
       <input type="text" placeholder="Name" name="user_name">
-      <textarea placeholder="Status message (140 characters)" rows="10" name="title"></textarea>
+      <textarea placeholder="Status message (140 characters)" rows="6" name="title"></textarea>
       <input type="submit" class="success button">
     </form>
     <a class="close-reveal-modal">×</a>
@@ -98,37 +97,6 @@
         </blockquote>
     </div>
   </script>
-  
-  <!-- Included JS Files (Uncompressed) -->
-  <!--
-  
-  <script src="javascripts/jquery.js"></script>
-  
-  <script src="javascripts/jquery.foundation.mediaQueryToggle.js"></script>
-  
-  <script src="javascripts/jquery.foundation.forms.js"></script>
-  
-  <script src="javascripts/jquery.foundation.reveal.js"></script>
-  
-  <script src="javascripts/jquery.foundation.orbit.js"></script>
-  
-  <script src="javascripts/jquery.foundation.navigation.js"></script>
-  
-  <script src="javascripts/jquery.foundation.buttons.js"></script>
-  
-  <script src="javascripts/jquery.foundation.tabs.js"></script>
-  
-  <script src="javascripts/jquery.foundation.tooltips.js"></script>
-  
-  <script src="javascripts/jquery.foundation.accordion.js"></script>
-  
-  <script src="javascripts/jquery.placeholder.js"></script>
-  
-  <script src="javascripts/jquery.foundation.alerts.js"></script>
-  
-  <script src="javascripts/jquery.foundation.topbar.js"></script>
-  
-  -->
 
   <!-- Included JS Files (Compressed) -->
   <script src="javascripts/jquery.js"></script>
