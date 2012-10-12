@@ -45,7 +45,7 @@
     collections: {},
     views: {},
     utils: {},
-    PubSub: _.extend({}, Backbone.Events)
+    mediator: _.extend({}, Backbone.Events)
   };
 
   window.huskr.models.User = Backbone.Model.extend();
@@ -56,7 +56,7 @@
       }
     },
     newerThan: function( timestamp ) {
-      return Date.parse( this.get("created_at") ) < Date.parse( timestamp );
+      return Date.parse( this.get("created_at") ) > Date.parse( timestamp );
     }
   });
   window.huskr.collections.statusList = new (Backbone.Collection.extend({
@@ -81,10 +81,42 @@
     return Date.create( date ).relative();
   };
 
-  _.extend( window.huskr.PubSub, {
-    subscribe: function() {},
-    unsubscribe: function() {},
-    _seconds: function() {}
+  _.extend( window.huskr.mediator, {
+    _subscribers: {},
+    _timer: null,
+    subscribe: function( channel, fn, context ) {
+      this._subscribers[ channel ] = this._subscribers[ channel ] || [];
+      if ( _.indexOf(this._subscribers[channel], context.cid) === -1 ) {
+        this._subscribers[ channel ].push( context.cid );
+        this.on( channel, fn, context );
+      }
+      if ( channel === "second-tick" && this._subscribers[channel].length ) {
+        if ( ! this._timer ) {
+          var self = this;
+          this._timer = setInterval( function() {
+            self.publish( "second-tick" );
+          }, 100 );
+        }
+      }
+    },
+    unsubscribe: function( channel, fn, context ) {
+      this._subscribers[ channel ] = this._subscribers[ channel ] || [];
+      var index = _.indexOf( this._subscribers[channel], context.cid );
+      if ( index !== -1 ) {
+        this._subscribers[ channel ].splice( index, 1 );
+        this.off( channel, fn, context );
+      }
+      if ( channel === "second-tick" && ! this._subscribers[channel].length ) {
+        if ( this._timer ) {
+          clearInterval( this._timer );
+          this._timer = null;
+        }
+      }
+      this.off( channel, fn, context );
+    },
+    publish: function( channel ) {
+      this.trigger( channel );
+    }
   } );
 
   $(function(){
@@ -92,6 +124,9 @@
       tagName: "div",
       className: "row",
       template: _.template( $("#status-view").html() ),
+      events: {
+        "updateTime": "updateTime"
+      },
       initialize: function() {
         _.bind( "renderTime", this );
         this.manageSubscriptions();
@@ -117,17 +152,17 @@
       },
       manageSubscriptions: function() {
         if ( this.model.newerThan((1).minutesBefore("now")) ) {
-          window.huskr.PubSub.unsubscribe(
+          window.huskr.mediator.unsubscribe(
             "minute-tick", this.updateTime, this
           );
-          window.huskr.PubSub.subscribe(
+          window.huskr.mediator.subscribe(
             "second-tick", this.updateTime, this
           );
         } else {
-          window.huskr.PubSub.subscribe(
+          window.huskr.mediator.subscribe(
             "minute-tick", this.updateTime, this
           );
-          window.huskr.PubSub.unsubscribe(
+          window.huskr.mediator.unsubscribe(
             "second-tick", this.updateTime, this
           );
         }
@@ -150,13 +185,54 @@
       }
     });
 
-    var statusListView = new window.huskr.views.StatusList({
-      collection: window.huskr.collections.statusList
+    var Router = Backbone.Router.extend({
+      routes: {
+        "": "home",
+        "post": "post"
+      },
+      initialize: function() {
+        this.statusListView = new window.huskr.views.StatusList({
+          collection: window.huskr.collections.statusList
+        });
+        window.huskr.collections.statusList.fetch();
+      },
+      home: function() {
+        postModal.hide();
+      },
+      post: function() {
+        postModal.show();
+      }
     });
 
-    // Form wiring
+    var Modal = function( el ) {
+      this.$el = $(el);
+    };
 
-    $("#newStatus").submit(function() {
+    var postModal = new Modal( "#postModal" );
+
+    _.extend( Modal.prototype, {
+      init: function() {
+        this.$el.bind( "reveal:close", function() {
+          window.huskr.router.navigate(
+            "",
+            { replace: true }
+          );
+        } );
+      },
+      show: function() {
+        this.$el.reveal();
+      },
+      hide: function() {
+        this.$el.trigger( "reveal:close" );
+      },
+      isVisible: function() {
+        return this.$el.hasClass( "open" );
+      }
+    } );
+
+    // Form listener
+
+    $("#newStatus").submit(function( e ) {
       var $this = $(this),
           user_name = $( "input[name=user_name]", $this ),
           title = $( "textarea[name=title]", $this );
@@ -167,31 +243,39 @@
       });
 
       if ( created ) {
-        $("#postModal").trigger( "reveal:close" );
+        postModal.hide();
         title.val("");
-      } else {
-        alert('creation error');
       }
 
-      return false;
+      e.preventDefault();
     });
 
-    // // Set up relative-date timers
-    // if ( window.huskr.timers.minute ) {
-    //   clearInterval( window.huskr.timers.minute );
-    //   var newerModels = window.huskr.collections.statusList.newerThan(
-    //     ( 1 ).minutesBefore( "now" )
-    //   );
-    //   window.huskr.timers.minute = setInterval( function() {
-    //     //////////////
-    //     newerModels = window.huskr.collections.statusList.newerThan.call(
-    //       newerModels,
-    //       ( 1 ).minutesBefore( "now" )
-    //     );
-    //   }, 1000 );
-    // }
+    // post button listener
+    
+    $( "#postButton" ).click(function( e ) {
 
-    window.huskr.collections.statusList.fetch();
+      window.huskr.router.navigate(
+        "post",
+        { trigger: true, replace: true }
+      );
+
+      e.preventDefault();
+    });
+
+    // modal listener
+
+    postModal.init();
+
+    // Kick off the app
+
+    window.huskr.router = new Router();
+    Backbone.history.start({pushState: true});
+
+    // Start the timer
+    
+    setInterval( function() {
+      window.huskr.mediator.publish( "minute-tick" );
+    }, 60*1000 );
 
   });
 
