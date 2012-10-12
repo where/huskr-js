@@ -22,6 +22,9 @@
     "sinon":      "latest",
     "sinon-chai": "latest",
     "grunt":      "latest"
+  },
+  "dependencies":{
+    "express":    "latest"
   }
 }
 
