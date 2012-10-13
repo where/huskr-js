@@ -1,4 +1,18 @@
 requirejs.config({
+    config: {
+        modal: {
+            modalId: '#postModal'
+        },
+        'views/statuslist': {
+            elementId: '#statuses'
+        },
+        'collections/statuslist': {
+            apiUrl: 'http://huskr.herokuapp.com/api/v1/statuses.json'
+        },
+        dom: {
+            modalId: '#newStatus'
+        }
+    },
     paths: {
         'jquery': 'libs/jquery',
         'lodash': 'libs/lodash-min',
@@ -18,20 +32,6 @@ requirejs.config({
             exports: 'Sugar'
         },
         'foundation': ["jquery"]
-    },
-    config: {
-        modal: {
-            modalId: '#postModal'
-        },
-        'views/statuslist': {
-            elementId: '#statuses'
-        },
-        'collections/statuslist': {
-            apiUrl: 'http://huskr.herokuapp.com/api/v1/statuses.json'
-        },
-        dom: {
-            modalId: '#newStatus'
-        }
     }
 });
 
