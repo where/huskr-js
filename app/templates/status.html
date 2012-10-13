@@ -1,0 +1,11 @@
+<div class="twelve columns">
+    <blockquote>
+      <%= title %>
+      <cite>
+        <strong><%= user_name %></strong>
+        <span title="<%= created_at %>" class="relative-time">
+          <% print( Date.create(created_at).relative() ); %>
+        </span>
+      </cite>
+    </blockquote>
+</div>
