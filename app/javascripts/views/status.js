@@ -15,12 +15,13 @@ define([
       "updateTime": "updateTime"
     },
     initialize: function() {
-      _.bind( "renderTime", this );
+      _.bind( this.renderTime, this );
       this.manageSubscriptions();
       this.model.on( "change", this.render, this );
     },
     render: function() {
-      var keys = _.keys(this.model.changedAttributes());
+      var changedAttributes = this.model.changedAttributes() || {},
+          keys = _.keys( changedAttributes );
       if ( keys.length === 1 && keys[0] === "created_at" ) {
         this.updateTime();
       } else {

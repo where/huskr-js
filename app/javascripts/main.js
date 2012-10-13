@@ -7,7 +7,7 @@ requirejs.config({
             elementId: '#statuses'
         },
         'collections/statuslist': {
-            apiUrl: 'http://huskr.herokuapp.com/api/v1/statuses.json'
+            apiUrl: 'http://0.0.0.0:3001/api/v1/statuses.json'
         },
         dom: {
             modalId: '#newStatus'
