@@ -2,7 +2,7 @@ define([
   'jquery',
   'lodash',
   'foundation',
-  'module',
+  'module'
 ], function( $, _, foundation, module ) {
   var Modal = function( el ) {
     this.el = el;
