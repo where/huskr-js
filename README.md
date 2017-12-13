@@ -35,7 +35,7 @@ You can find a tutorial on how to get a virtual machine up and running with all 
 
 * [Express](http://expressjs.com)
 * [Grunt](http://gruntjs.com)
-* [Mocha](http://visionmedia.github.com/mocha/)
+* [Mocha](http://mochajs.org/)
 * [Chai](http://chaijs.com)
 * [Sinon](http://sinonjs.org)
 
